@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  {{ $style := resources.Get "styles.css" | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
-  <title>{{ block "title" . }}
-    {{ .Site.Title }}
-    {{ end }}</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    {{ $style := resources.Get "styles.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    <title>{{ block "title" . }}
+      {{ .Site.Title }}
+      {{ end }}</title>
 
-    <meta name="keywords" content="test, testing" />
-    <meta property="og:site_name" content="{{ $.Site.Title }}" />
-    <meta property="og:title" content="{{ $.Site.Title }}" />
-    <meta name="theme-color" content="#1a202c">
-    
-    {{ if .IsPage }}
-      <title>{{ .Title }} | {{ $.Site.Title }}</title>
-      <meta property="og:type" content="article" />
-      <meta property="og:title" content="{{ .Title }}" />
-      <meta property="og:description" content="{{ .Summary }}" />
-      <meta name="description" content="{{ .Summary }}" />
-      <meta property="article:author" content="your-name" />
-      <meta property="article:published_time" content="{{ .Date }}" />
-    {{ else }}
-      <title>{{ $.Site.Title }}</title>
+      <meta name="keywords" content="test, testing" />
+      <meta property="og:site_name" content="{{ $.Site.Title }}" />
       <meta property="og:title" content="{{ $.Site.Title }}" />
-      <meta property="og:description" content="blog about testing" />
-      <meta name="description" content="blog about testing" />
-    {{ end }}
-</head>
+      <meta name="theme-color" content="#1a202c">
+      
+      {{ if .IsPage }}
+        <title>{{ .Title }} | {{ $.Site.Title }}</title>
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="{{ .Title }}" />
+        <meta property="og:description" content="{{ .Summary }}" />
+        <meta name="description" content="{{ .Summary }}" />
+        <meta property="article:author" content="your-name" />
+        <meta property="article:published_time" content="{{ .Date }}" />
+      {{ else }}
+        <title>{{ $.Site.Title }}</title>
+        <meta property="og:title" content="{{ $.Site.Title }}" />
+        <meta property="og:description" content="blog about testing" />
+        <meta name="description" content="blog about testing" />
+      {{ end }}
+  </head>
 
-<body>
-  {{ partial "header.html" . }}
-  {{ partial "navbar.html" . }}
-  {{ block "main" . }}
-  <!-- The part of the page that begins to differ between templates -->
-  {{ end }}
-  {{ partial "footer.html" . }}
-</body>
+  <body>
+    {{ partial "navbar.html" . }}
+    <div class="columns is-desktop">
+      <main class="column is-one-third is-offset-one-third">
+        {{ block "main" . }}
+        {{ end }}
+      </main>
+    </div>
+    {{ partial "footer.html" . }}
+  </body>
 
 </html>
+

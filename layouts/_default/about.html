@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="box">
+    <h1 class="title">{{ .Title }}</h1>
+    {{ $asset := resources.Get "/profile.png"}}
+    {{ $img := $asset.Fit "600x400" }}
+
+    <figure class="image">
+        <img class="is-rounded" alt="{{.Params.imageAlt}}" src="{{ $img.RelPermalink }}" />
+    </figure>
+
+    <article class="content">
+      {{ .Content }}
+    </article>
+</div>
+{{ end }}

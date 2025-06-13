@@ -1,9 +1,19 @@
 <a class="box" href="{{ .Permalink }}">
-    <h4 class="title is-4">{{ .Title }}</h4>
-    <h6 class="subtitle has-text-grey is-6">{{ .Summary }}</h6>
-    <div>
-      <span class="tag is-link">{{ .ReadingTime }} Minutes</span>
-      <span class="tag is-dark">{{ .Date.Format "Jan 2, 2006" }}</span>
-      <span class="tag is-warning">{{ .WordCount }} Words</span>
-    </div>
+    {{ $imageName := .Params.imageName}}
+    {{ $asset := resources.Get $imageName}}
+    {{ $img := $asset.Fit "100x50" }}
+    
+    <span class="tag is-dark"> {{ .Date.Format "Jan 2, 2006" }} </span>
+    <hr>
+    <div class="columns is-mobile">
+        <div class="column is-one-quarter">
+            <figure class="image is-square">
+                <img alt="{{.Params.imageAlt}}" src="{{ $img.RelPermalink }}" />
+            </figure>     
+        </div>
+        <div class="column">
+            <h4 class="title is-4">{{ .Title }}</h4>
+            <h6 class="subtitle has-text-grey is-6">{{ .Summary }}</h6>
+        </div>
+      </div>
   </a>
