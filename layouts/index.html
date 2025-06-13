@@ -1,4 +1,10 @@
-{{ partial "header.html" . }}
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
-{{ partial "footer.html" . }}
+{{ define "main" }}
+<section class="section">
+  <main class="container">
+    {{ range first 5 .Site.RegularPages }}
+    {{ .Render "summary" }}
+    {{ end }}
+  </main>
+</section>
+{{ end }}
+

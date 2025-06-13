@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{ $asset := resources.Get "/me2025.png" }}
+{{ $img := $asset.Fit "600x400" }}
+
+<section class="section">
+  <main class="container">
+    <h1 class="title">Page not found</h1>
+    <figure class="image is-1by1">
+    <img alt="Me" src="{{ $img.RelPermalink }}" />
+    </figure>
+    <a href="/">Go Home</a>
+  </main>
+</section>
+{{ end }}
